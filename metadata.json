@@ -1,0 +1,7 @@
+{
+  "name": "Copy of Engenheiro Teste - Budget AI",
+  "description": "High-performance construction material estimation and cost engineering platform powered by Gemini 3 Deep Reasoning and Vision.",
+  "requestFramePermissions": [
+    "camera"
+  ]
+}
