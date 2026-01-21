@@ -1,17 +1,19 @@
 
 import Dexie, { Table } from 'dexie';
-import { Message, Project } from './types';
+import { Message, Project, Session, StoredBlob } from './types';
 
-// Using a standard instance-based approach for Dexie initialization to ensure all 
-// methods like 'version' are correctly recognized by the TypeScript compiler.
-const database = new Dexie('BudgetDB');
+const database = new Dexie('CivilEstimatorDBV2');
 
 database.version(1).stores({
-  messages: '++id, projectId, role, timestamp',
-  projects: '++id, name, createdAt, lastMessageAt'
+  projects: '++id, name, createdAt, lastMessageAt',
+  sessions: '++id, projectId, name, createdAt, lastActiveAt, isCommitted',
+  messages: '++id, projectId, sessionId, role, timestamp',
+  blobs: '++id, projectId, sessionId, type, timestamp'
 });
 
 export const db = database as Dexie & {
-  messages: Table<Message>;
   projects: Table<Project>;
+  sessions: Table<Session>;
+  messages: Table<Message>;
+  blobs: Table<StoredBlob>;
 };
